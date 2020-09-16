@@ -18,7 +18,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install cibuildwheel
         #pip install git+https://github.com/joerick/cibuildwheel.git
-        CIBW_SKIP='pp*' CIBW_TEST_REQUIRES=pytest CIBW_BEFORE_TEST='if [ `delocate-listdeps {wheel} | wc -l` -gt 0 ]; then exit 1; fi' CIBW_TEST_COMMAND='python -m pytest {project}/c {project}/testing' cibuildwheel --output-dir wheelhouse .
+        CIBW_SKIP='pp*' CIBW_TEST_REQUIRES=pytest CIBW_REPAIR_WHEEL_COMMAND_MACOS='delocate-listdeps {wheel} && (if [ `delocate-listdeps {wheel} | wc -l` -gt 0 ]; then exit 1; fi) && delocate-wheel --require-archs x86_64 -w {dest_dir} {wheel}' CIBW_TEST_COMMAND='python -m pytest {project}/c {project}/testing' cibuildwheel --output-dir wheelhouse .
     - task: PublishBuildArtifacts@1
       inputs: {pathtoPublish: 'wheelhouse'}
 - job: windows
