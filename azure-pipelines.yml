@@ -11,7 +11,7 @@ jobs:
     - task: PublishBuildArtifacts@1
       inputs: {pathtoPublish: 'wheelhouse'}
 - job: macos
-  pool: {vmImage: 'macOS-10.14'}
+  pool: {vmImage: 'macOS-10.15'}
   steps:
     - task: UsePythonVersion@0
     - bash: |
