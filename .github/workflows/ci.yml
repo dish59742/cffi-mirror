@@ -181,6 +181,7 @@ jobs:
           ${{ env.img }} \
           bash -c '\
           export LDSHARED="aarch64-unknown-linux-gnueabi-gcc -pthread -shared" && \
+          yum install libffi-devel && \
           ${{ env.py }} setup.py bdist_wheel --plat-name=manylinux2014_aarch64'
     - name: Repair wheel wheel
       run: |
